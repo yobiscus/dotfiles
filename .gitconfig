@@ -1,0 +1,5 @@
+[user]
+	email = jo@stashed.dev
+	name = Jonathan Gravel
+[core]
+	pager = less -X -F
