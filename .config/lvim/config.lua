@@ -188,12 +188,12 @@ lvim.plugins = {
     "simrat39/rust-tools.nvim",
     config = function()
       local lsp_installer_servers = require("nvim-lsp-installer.servers")
-			local _, requested_server = lsp_installer_servers.get_server("rust_analyzer")
-			local opts = {
-				server = {
-					cmd = requested_server._default_options.cmd,
-					on_attach = require("lvim.lsp").common_on_attach,
-					on_init = require("lvim.lsp").common_on_init,
+      local _, requested_server = lsp_installer_servers.get_server("rust_analyzer")
+      local opts = {
+        server = {
+          cmd = requested_server._default_options.cmd,
+          on_attach = require("lvim.lsp").common_on_attach,
+          on_init = require("lvim.lsp").common_on_init,
           settings = {
             ["rust-analyzer"] = {
               checkOnSave = {
@@ -201,9 +201,9 @@ lvim.plugins = {
               },
             },
           },
-				},
-			}
-			require("rust-tools").setup(opts)
+        },
+      }
+      require("rust-tools").setup(opts)
     end,
     ft = { "rust", "rs" },
   },
