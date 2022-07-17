@@ -19,5 +19,5 @@ set -g status-interval 5
 source ~/.tmux/tmux-gruvbox-dark.conf
 
 # active vs. non-active
-set-option -g window-style bg=colour234
-set-option -g window-active-style bg=colour235
+#set-option -g window-style bg=colour234
+#set-option -g window-active-style bg=colour235

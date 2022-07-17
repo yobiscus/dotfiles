@@ -112,10 +112,23 @@ source $ZSH/oh-my-zsh.sh
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Pyenv
+if [[ -d "$HOME/.pyenv/bin" ]] && [[ ! :$PATH: =~ :$HOME/\.pyenv/bin: ]] ; then
+    PATH="$PATH:$HOME/.pyenv/bin"
+fi
 if type pyenv >/dev/null; then
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  # eval "$(pyenv virtualenv-init -)"
+fi
+
+# Node
+if [[ -d "$HOME/.nodejs/bin" ]] && [[ ! :$PATH: =~ :$HOME/\.nodejs/bin: ]] ; then
+    PATH="$PATH:$HOME/.nodejs/bin"
+fi
+
+# Other
+if [[ -d "$HOME/.local/bin" ]] && [[ ! :$PATH: =~ :$HOME/\.local/bin: ]] ; then
+    PATH="$PATH:$HOME/.local/bin"
 fi
 
 # Other config
-export EDITOR=vim
+export EDITOR=lvim

@@ -27,10 +27,12 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # default location for rust exectuables
-if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$PATH:$HOME/.cargo/bin"
-fi
+. "$HOME/.cargo/env"
 
 if command -v brew &>/dev/null; then
     source $(brew --prefix nvm)/nvm.sh
+fi
+
+if [ -d "$HOME/.pyenv/bin" ] ; then
+    PATH="$PATH:$HOME/.pyenv/bin"
 fi
