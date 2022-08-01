@@ -14,7 +14,7 @@ lvim.format_on_save = true
 lvim.colorscheme = "gruvbox-material"
 vim.opt.list = true
 vim.opt.listchars = "tab:>-,trail:~,extends:>,precedes:<"
--- vim.opt.guifont = "FiraCode Nerd Font:h13"
+vim.opt.guifont = "MesloLGS NF:h11"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -23,6 +23,7 @@ vim.opt.listchars = "tab:>-,trail:~,extends:>,precedes:<"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.term_mode["<Esc><Esc>"] = "<C-\\><C-n>"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- vim.keymap.del("i", "<A-j>")
@@ -102,7 +103,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
+
+-- setup by rust-tools plugin
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
+-- setup skipped servers
+require("lvim.lsp.manager").setup("emmet_ls")
+require("lvim.lsp.manager").setup("tailwindcss")
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
@@ -207,6 +214,20 @@ lvim.plugins = {
     end,
     ft = { "rust", "rs" },
   },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      })
+    end,
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -226,3 +247,6 @@ lvim.plugins = {
 -- Misc
 lvim.builtin.project.silent_chdir = false
 lvim.builtin.dap.active = true
+
+-- Neovide
+-- vim.g.neovide_fullscreen = true
