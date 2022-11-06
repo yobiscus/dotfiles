@@ -1,0 +1,48 @@
+font:
+  size: 11
+  normal:
+    family: MesloLGS NG
+  bold:
+    family: MesloLGS NG
+  italic:
+    family: MesloLGS NG
+  bold_italic:
+    family: MesloLGS NG
+
+# Gruvbox
+colors:
+  primary:
+    background: '#252525'
+    foreground: '#ecdbb2'
+
+  normal:
+    black:   '0x665c54'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe78a4e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
+
+  bright:
+    black:   '0x928374'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe3a84e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    white:   '0xdfbf8e'
+    cyan:    '0x89b482'
+
+key_bindings:
+  - { key: Key0, mods: Alt, chars: "\x1b0" }
+  - { key: Key1, mods: Alt, chars: "\x1b1" }
+  - { key: Key2, mods: Alt, chars: "\x1b2" }
+  - { key: Key3, mods: Alt, chars: "\x1b3" }
+  - { key: Key4, mods: Alt, chars: "\x1b4" }
+  - { key: Key5, mods: Alt, chars: "\x1b5" }
+  - { key: Key6, mods: Alt, chars: "\x1b6" }
+  - { key: Key7, mods: Alt, chars: "\x1b7" }
+  - { key: Key8, mods: Alt, chars: "\x1b8" }
+  - { key: Key9, mods: Alt, chars: "\x1b9" }
