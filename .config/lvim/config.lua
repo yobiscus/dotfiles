@@ -25,13 +25,13 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.term_mode["<Esc><Esc>"] = "<C-\\><C-n>"
 -- unmap a default keymapping
--- vim.keymap.del("n", "<C-Up>")
--- vim.keymap.del("i", "<A-j>")
--- vim.keymap.del("i", "<A-k>")
--- vim.keymap.del("n", "<A-j>")
--- vim.keymap.del("n", "<A-k>")
--- vim.keymap.del("v", "<A-j>")
--- vim.keymap.del("v", "<A-k>")
+vim.keymap.del("n", "<C-Up>")
+vim.keymap.del("i", "<A-j>")
+vim.keymap.del("i", "<A-k>")
+vim.keymap.del("n", "<A-j>")
+vim.keymap.del("n", "<A-k>")
+vim.keymap.del("v", "<A-j>")
+vim.keymap.del("v", "<A-k>")
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
