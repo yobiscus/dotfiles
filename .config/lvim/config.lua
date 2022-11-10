@@ -17,6 +17,7 @@ vim.opt.listchars = "tab:>-,trail:~,extends:>,precedes:<"
 vim.opt.guifont = "MesloLGS NF:h10"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
+vim.opt.relativenumber = true
 
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
