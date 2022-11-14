@@ -6,7 +6,7 @@ vim.opt.clipboard = nil
 
 -- misc lvim settings
 lvim.log.level = "warn"
-lvim.format_on_save.enabled = false
+lvim.format_on_save.enabled = true
 lvim.colorscheme = "gruvbox-material"
 lvim.builtin.project.silent_chdir = false
 -- lvim.builtin.dap.active = true
@@ -41,9 +41,10 @@ lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Project
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.terminal.active = true
+lvim.builtin.terminal.execs = {}
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -68,7 +69,14 @@ lvim.builtin.treesitter.highlight.enable = true
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 -- html/css LSP settings
 require("lvim.lsp.manager").setup("emmet_ls")
-require("lvim.lsp.manager").setup("tailwindcss")
+require("lvim.lsp.manager").setup("tailwindcss", {
+  filetypes = { "rust" },
+  init_options = {
+    userLanguages = {
+      rust = "html",
+    },
+  }
+})
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
