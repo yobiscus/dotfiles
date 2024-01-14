@@ -140,6 +140,7 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "black", filetypes = { "python" } },
   { command = "isort", filetypes = { "python" } },
+  { command = "leptosfmt", filetypes = { "rust" } },
 }
 
 -- Additional Plugins
@@ -201,6 +202,7 @@ lvim.plugins = {
                 command = "clippy",
                 allTargets = true,
                 features = "all",
+                loadOutDirsFromCheck = true,
                 -- command = "cargo clippy --workspace --message-format=json --all-targets --all-features"
               },
             },
