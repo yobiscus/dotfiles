@@ -9,7 +9,7 @@ return {
 
     -- optimized for colemak keybind even though I am on qwerty
     vim.keymap.set('n', '<C-m>', function() ui.nav_file(1) end) -- netrw hijacks this, what to do?
-    vim.keymap.set('n', '<C-n>', function() ui.nav_file(2) end)
-    vim.keymap.set('n', '<C-e>', function() ui.nav_file(3) end)
+    -- vim.keymap.set('n', '<C-n>', function() ui.nav_file(2) end)
+    vim.keymap.set('n', '<C-e>', function() ui.nav_file(2) end)
   end
 }
