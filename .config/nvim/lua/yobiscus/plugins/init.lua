@@ -1,4 +1,5 @@
 return {
+  "j-hui/fidget.nvim",
   "sainnhe/gruvbox-material",
   {
     "christoomey/vim-tmux-navigator",
