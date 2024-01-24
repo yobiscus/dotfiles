@@ -1,9 +1,12 @@
 vim.g.mapleader = " "
 
 -- settings
+vim.opt.mouse = ""
 vim.opt.undofile = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- keymaps
 vim.keymap.set('n', '<leader>on', '<cmd>Ex<cr>', { desc = 'Netrw' })
