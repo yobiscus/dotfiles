@@ -3,3 +3,4 @@ if status is-interactive
 end
 
 pyenv init - | source
+bind \cd delete-char  # don't exit on <C-d>
