@@ -1,5 +1,5 @@
 return {
-  "sainnhe/gruvbox-material",
+  "ellisonleao/gruvbox.nvim",
   {
     "j-hui/fidget.nvim",
     config = function()
