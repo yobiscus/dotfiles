@@ -8,6 +8,7 @@ return {
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
     { 'L3MON4D3/LuaSnip' },
+    { 'onsails/lspkind.nvim' },
   },
   config = function()
     local lsp_zero = require('lsp-zero')
@@ -31,7 +32,21 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
     end
     cmp.setup({
-      formatting = lsp_zero.cmp_format(),
+      formatting = {
+        fields = { 'menu', 'abbr', 'kind' },
+        format = require('lspkind').cmp_format({
+          mode          = 'symbol',
+          maxwidth      = 50,
+          ellipsis_char = '...',
+          menu          = {
+            nvim_lsp = 'λ',
+            luasnip = '⋗',
+            buffer = 'Ω',
+            path = '🖫',
+            nvim_lua = 'Π',
+          },
+        }),
+      },
       mapping = cmp.mapping.preset.insert({
         ["<Tab>"] = vim.schedule_wrap(function(fallback)
           if cmp.visible() and has_words_before() then
@@ -85,6 +100,12 @@ return {
           require('lspconfig').rust_analyzer.setup({
             settings = {
               ['rust-analyzer'] = {
+                cargo = {
+                  allFeatures = true,
+                },
+                checkOnSave = {
+                  command = "clippy",
+                },
                 inlayHints = {
                   parameterHints = { enable = true },
                   typeHints = { enable = true },
