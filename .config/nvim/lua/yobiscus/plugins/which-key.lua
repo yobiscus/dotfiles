@@ -13,6 +13,7 @@ return {
       wk.register({
         f = { desc = "Find" },
         o = { desc = "Open" },
+        x = { desc = "Trouble" },
       }, { prefix = "<leader>" })
     end
   },
