@@ -13,6 +13,9 @@ return {
   config = function()
     local lsp_zero = require('lsp-zero')
     lsp_zero.on_attach(function(client, bufnr)
+      -- disable didChangeWatchedFiles capability which is expensive for large workspaces
+      client.config.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+
       -- see :help lsp-zero-keybindings to learn the available actions
       local opts = { buffer = bufnr }
       lsp_zero.default_keymaps(opts)
