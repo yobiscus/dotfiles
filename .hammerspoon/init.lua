@@ -103,68 +103,41 @@ function WindowControl:reposition(where)
 end
 
 function WindowControl:resize(direction, mod)
-  local win = self.window
   local f = self.frame
   local where = self.where
 
-  local screen = win:screen()
-  local max = screen:frame()
-
-  if where == "zoom" then
-    if mod == nil then
-      -- emulate behaviour from different location so that the window shrinks
-      if direction == "left" then
-        where = "left"
-      elseif direction == "right" then
-        where = "right"
-      elseif direction == "up" then
-        where = "top"
-      elseif direction == "down" then
-        where = "bottom"
-      end
-    elseif mod == "shift" then
-      -- emulate behaviour from different location so that the window shrinks
-      if direction == "left" then
-        where = "right"
-      elseif direction == "right" then
-        where = "left"
-      elseif direction == "up" then
-        where = "bottom"
-      elseif direction == "down" then
-        where = "top"
-      end
-    end
-  end
-
-  if where:find("left") ~= nil then
+  if mod == nil then
     if direction == "left" then
+      -- shrink from right
       f.w = f.w - Settings.windowResizeIncrement
     elseif direction == "right" then
-      f.w = f.w + Settings.windowResizeIncrement
+      -- shrink from left
+      f.x = f.x + Settings.windowResizeIncrement
+      f.w = f.w - Settings.windowResizeIncrement
+    elseif direction == "up" then
+      -- shrink from bottom
+      f.h = f.h - Settings.windowResizeIncrement
+    elseif direction == "down" then
+      -- shrink from top
+      f.y = f.y + Settings.windowResizeIncrement
+      f.h = f.h - Settings.windowResizeIncrement
     end
-  elseif where:find("right") ~= nil then
+  elseif mod == "shift" then
+    -- emulate behaviour from different location so that the window shrinks
     if direction == "left" then
+      -- grow to left
       f.x = f.x - Settings.windowResizeIncrement
       f.w = f.w + Settings.windowResizeIncrement
     elseif direction == "right" then
-      f.x = f.x + Settings.windowResizeIncrement
-      f.w = f.w - Settings.windowResizeIncrement
-    end
-  end
-
-  if where:find("top") ~= nil then
-    if direction == "up" then
-      f.h = f.h - Settings.windowResizeIncrement
-    elseif direction == "down" then
-      f.h = f.h + Settings.windowResizeIncrement
-    end
-  elseif where:find("bottom") ~= nil then
-    if direction == "up" then
+      -- grow to right
+      f.w = f.w + Settings.windowResizeIncrement
+    elseif direction == "up" then
+      -- grow to top
       f.y = f.y - Settings.windowResizeIncrement
       f.h = f.h + Settings.windowResizeIncrement
     elseif direction == "down" then
-      f.y = f.y + Settings.windowResizeIncrement
-      f.h = f.h - Settings.windowResizeIncrement
+      -- grow to bottom
+      f.h = f.h + Settings.windowResizeIncrement
     end
   end
 end
