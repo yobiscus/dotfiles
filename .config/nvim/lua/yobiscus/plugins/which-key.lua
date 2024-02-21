@@ -12,6 +12,7 @@ return {
       -- <leader> groups
       wk.register({
         f = { desc = "Find" },
+        l = { desc = "LSP" },
         o = { desc = "Open" },
         x = { desc = "Trouble" },
       }, { prefix = "<leader>" })

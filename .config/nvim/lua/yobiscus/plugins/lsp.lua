@@ -17,12 +17,20 @@ return {
       client.config.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
       -- see :help lsp-zero-keybindings to learn the available actions
-      local opts = { buffer = bufnr }
-      lsp_zero.default_keymaps(opts)
+      lsp_zero.default_keymaps({
+        buffer = bufnr,
+        exclude = { "<F2>", "<F3>", "<F4>" },
+      })
 
       vim.keymap.set('n', '<leader>lf', function()
         vim.lsp.buf.format({ async = false, timeout_ms = 5000 })
-      end, opts)
+      end, { buffer = bufnr, desc = "format" })
+      vim.keymap.set('n', '<leader>lr', function()
+        vim.lsp.buf.rename()
+      end, { buffer = bufnr, desc = "rename" })
+      vim.keymap.set('n', '<leader>lc', function()
+        vim.lsp.buf.code_action()
+      end, { buffer = bufnr, desc = "code action" })
 
       vim.lsp.inlay_hint.enable(bufnr, true)
     end)
@@ -59,14 +67,14 @@ return {
           end
         end),
         ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
       }),
       sorting = {
         priority_weight = 2,
         comparators = {
-          require("copilot_cmp.comparators").prioritize,
+          -- require("copilot_cmp.comparators").prioritize,
           -- Below is the default comparitor list and order for nvim-cmp
           cmp.config.compare.offset,
           -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
@@ -81,7 +89,7 @@ return {
         },
       },
       sources = cmp.config.sources({
-        { name = 'copilot' },
+        -- { name = 'copilot' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
       }, {
