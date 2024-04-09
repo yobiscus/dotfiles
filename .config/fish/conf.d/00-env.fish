@@ -15,6 +15,3 @@ switch (uname)
 	case Darwin
 		fish_add_path /opt/homebrew/bin
 end
-
-# tools
-type -q pyenv; and pyenv init - | source
