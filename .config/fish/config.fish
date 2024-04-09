@@ -1,6 +1,3 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    bind \cd delete-char  # don't exit on <C-d>
 end
-
-pyenv init - | source
-bind \cd delete-char  # don't exit on <C-d>
