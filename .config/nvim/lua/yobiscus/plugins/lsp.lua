@@ -22,15 +22,15 @@ return {
         exclude = { "<F2>", "<F3>", "<F4>" },
       })
 
+      vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { buffer = bufnr, desc = "code action" })
+      vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = bufnr, desc = "rename" })
+
+      vim.keymap.set('n', '<leader>li', function()
+        vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+      end, {buffer = bufnr, desc = "toggle inlay hints" })
       vim.keymap.set('n', '<leader>lf', function()
         vim.lsp.buf.format({ async = false, timeout_ms = 5000 })
       end, { buffer = bufnr, desc = "format" })
-      vim.keymap.set('n', '<leader>lr', function()
-        vim.lsp.buf.rename()
-      end, { buffer = bufnr, desc = "rename" })
-      vim.keymap.set('n', '<leader>lc', function()
-        vim.lsp.buf.code_action()
-      end, { buffer = bufnr, desc = "code action" })
 
       vim.lsp.inlay_hint.enable(bufnr, true)
     end)
