@@ -18,5 +18,8 @@ vim.keymap.set('n', '<leader>oc', function()
   vim.cmd('e lua/yobiscus/init.lua')
 end, { desc = 'Neovim config' })
 
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
+
 -- plugins
 require("yobiscus.lazy")
