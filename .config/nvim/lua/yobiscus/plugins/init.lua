@@ -27,4 +27,11 @@ return {
       vim.keymap.set('n', '<leader>ou', vim.cmd.UndotreeToggle, { desc = "Undotree" })
     end,
   },
+  {
+    'Bekaboo/dropbar.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'nvim-telescope/telescope-fzf-native.nvim',
+    }
+  },
 }
