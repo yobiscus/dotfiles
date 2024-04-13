@@ -15,22 +15,148 @@
 )
 
 (defalias
-  ;; home row mods GACS
-  ma (tap-hold-next-release 200 a lmet)
-  ar (tap-hold-next-release 200 r lalt)
-  cs (tap-hold-next-release 200 s lctl)
-  st (tap-hold-next-release 200 t lsft)
-  sn (tap-hold-next-release 200 n rsft)
-  ce (tap-hold-next-release 200 e rctl)
-  ai (tap-hold-next-release 200 i lalt)
-  mo (tap-hold-next-release 200 o rmet)
+  ;; Control Panel Layer
+  esc (tap-hold-next-release 200 esc (layer-toggle control_panel))
+  ly1 (layer-switch qwerty)
+  ly2 (layer-switch colemak_dh)
+  ly3 (layer-switch M_Base)
 )
 
-(deflayer colemak
-  XX
+(deflayer qwerty
+  @esc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lalt lmet           spc            ralt rmet rctl
+)
+
+(deflayer colemak_dh
+  @esc
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    f    p    b    j    l    u    y    ;    [    ]    \
-  esc  @ma  @ar  @cs  @st  g    m    @sn  @ce  @ai  @mo  '    ret
-  XX   x    c    d    v    z    k    h    ,    .    /    XX
-  XX   XX   XX             spc            XX   XX   XX
+  caps a    r    s    t    g    m    n    e    i    o    '    ret
+  lsft x    c    d    v    z    k    h    ,    .    /    rsft
+  lctl lalt lmet           spc            ralt rmet rctl
 )
+
+;; MIRYOKU layout
+
+(defalias
+  ;; GACS homerow mods
+  a_met (tap-hold-next-release 200 a met)
+  r_alt (tap-hold-next-release 200 r alt)
+  s_ctl (tap-hold-next-release 200 s ctl)
+  t_sft (tap-hold-next-release 200 t sft)
+  n_sft (tap-hold-next-release 200 n sft)
+  e_ctl (tap-hold-next-release 200 e ctl)
+  i_alt (tap-hold-next-release 200 i alt)
+  o_met (tap-hold-next-release 200 o met)
+
+  ;; Thumb keys
+  spc_N (tap-hold-next-release 200 spc  (layer-toggle M_Nav))
+  ;; tab_M (tap-hold-next-release 200  (layer-toggle U_Mouse))
+  esc_M (tap-hold-next-release 200 esc  (layer-toggle M_Media))
+  bsp_M (tap-hold-next-release 200 bspc (layer-toggle M_Num))
+  ent_S (tap-hold-next-release 200 ent  (layer-toggle M_Sym))
+  del_F (tap-hold-next-release 200 del  (layer-toggle M_Fun))
+
+  ;; Media aliases
+  psong previoussong
+  nsong nextsong
+  plapa playpause
+
+  ;; Extra layers
+  l_tap (multi-tap 200 XX (layer-switch M_Tap))
+)
+
+;; TEMPLATE
+;; (deflayer M_?
+;;   @esc
+;;   XX     _      _      _      _      _      XX     _      _      _      _      _      XX     XX
+;;   XX     _      _      _      _      _      XX     _      _      _      _      _      XX     XX
+;;   XX     _      _      _      _      _      XX     _      _      _      _      _      XX
+;;   XX     XX     _      _      _      XX     XX     _      _      _      XX     XX
+;;   XX     XX     XX                   XX                   XX     XX     XX
+;; )
+
+(deflayer M_Base
+  @esc
+  XX     q      w      f      p      b      XX     j      l      u      y      '      XX     XX
+  XX     @a_met @r_alt @s_ctl @t_sft g      XX     m      @n_sft @e_ctl @i_alt @o_met XX     XX
+  XX     z      x      c      d      v      XX     k      h      ,      .      /      XX
+  XX     XX     @esc_M @spc_N tab    XX     XX     @ent_S @bsp_M @del_F XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer M_Tap
+  @esc
+  XX     q      w      f      p      b      XX     j      l      u      y      '      XX     XX
+  XX     a      r      s      t      g      XX     m      n      e      i      o      XX     XX
+  XX     z      x      c      d      v      XX     k      h      ,      .      /      XX
+  XX     XX     esc    spc    tab    XX     XX     ent    bspc   del    XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer M_Nav
+  @esc
+  XX     XX     @l_tap XX     XX     XX     XX     again  S-ins  C-ins  S-del  undo   XX     XX
+  XX     met    alt    ctl    sft    XX     XX     caps   left   down   up     right  XX     XX
+  XX     XX     XX     XX     XX     XX     XX     ins    home   pgdn   pgup   end    XX
+  XX     XX     XX     XX     XX     XX     XX     @ent_S @bsp_M @del_F XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer M_Media
+  @esc
+  XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX
+  XX     met    alt    ctl    sft    XX     XX     XX     @psong vold   volu   @nsong XX     XX
+  XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX     XX
+  XX     XX     XX     XX     XX     XX     XX     stopcd @plapa mute   XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer M_Num
+  @esc
+  XX     [      7      8      9      ]      XX     XX     XX     XX     XX     XX     XX     XX
+  XX     ;      4      5      6      =      XX     XX     sft    ctl    alt    met    XX     XX
+  XX     `      1      2      3      \\     XX     XX     XX     XX     XX     XX     XX
+  XX     XX     .      0      -      XX     XX     XX     XX     XX     XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer M_Sym
+  @esc
+  XX     {      &      *      \(     }      XX     XX     XX     XX     XX     XX     XX     XX
+  XX     :      $      %      ^      +      XX     XX     sft    ctl    alt    met    XX     XX
+  XX     ~      !      @      #      |      XX     XX     XX     XX     XX     XX     XX
+  XX     XX     \(     \)     \_     XX     XX     XX     XX     XX     XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer M_Fun
+  @esc
+  XX     _      _      _      _      _      XX     _      _      _      _      _      XX     XX
+  XX     _      _      _      _      _      XX     _      _      _      _      _      XX     XX
+  XX     -      _      _      _      _      XX     _      _      _      _      _      XX
+  XX     XX     _      _      _      XX     XX     _      _      _      XX     XX
+  XX     XX     XX                   XX                   XX     XX     XX
+)
+
+(deflayer control_panel
+  -
+  _    @ly1 @ly2 @ly3 -    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _
+)
+
+;; (deflayer template
+;;   @esc
+;;   _    _    _    _    _    _    _    _    _    _    _    _    _    _
+;;   _    _    _    _    _    _    _    _    _    _    _    _    _    _
+;;   _    _    _    _    _    _    _    _    _    _    _    _    _
+;;   _    _    _    _    _    _    _    _    _    _    _    _
+;;   _    _    _              _              _    _    _
+;; )
