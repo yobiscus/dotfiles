@@ -4,7 +4,8 @@ return {
     "j-hui/fidget.nvim",
     config = function()
       require("fidget").setup({
-        notification = { window = { winblend = 0 } }
+        notification = { window = { winblend = 0 } },
+        progress = { lsp = { progress_ringbuf_size = 2048 } },
       })
     end
   },
@@ -34,4 +35,5 @@ return {
       'nvim-telescope/telescope-fzf-native.nvim',
     }
   },
+  "kmonad/kmonad-vim",
 }
