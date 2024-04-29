@@ -33,7 +33,11 @@ return {
     dependencies = {
       'nvim-tree/nvim-web-devicons',
       'nvim-telescope/telescope-fzf-native.nvim',
-    }
+    },
+    config = function()
+      local api = require('dropbar.api')
+      vim.keymap.set('n', '<leader>od', api.pick, { desc = "Dropdown UI" })
+    end,
   },
   "kmonad/kmonad-vim",
 }
