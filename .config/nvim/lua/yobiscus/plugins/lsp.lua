@@ -28,9 +28,11 @@ return {
       vim.keymap.set('n', '<leader>li', function()
         vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
       end, {buffer = bufnr, desc = "toggle inlay hints" })
-      vim.keymap.set('n', '<leader>lf', function()
-        vim.lsp.buf.format({ async = false, timeout_ms = 5000 })
-      end, { buffer = bufnr, desc = "format" })
+
+      -- formatting is taken over by ./format.lua
+      -- vim.keymap.set('n', '<leader>lf', function()
+      --   vim.lsp.buf.format({ async = false, timeout_ms = 5000 })
+      -- end, { buffer = bufnr, desc = "format" })
 
       vim.lsp.inlay_hint.enable(bufnr, true)
     end)
