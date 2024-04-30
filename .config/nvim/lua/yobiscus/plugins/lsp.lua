@@ -27,7 +27,7 @@ return {
 
       vim.keymap.set('n', '<leader>li', function()
         vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-      end, {buffer = bufnr, desc = "toggle inlay hints" })
+      end, { buffer = bufnr, desc = "toggle inlay hints" })
 
       -- formatting is taken over by ./format.lua
       -- vim.keymap.set('n', '<leader>lf', function()
