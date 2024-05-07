@@ -184,8 +184,41 @@ mode "resize" {
 
 bindsym $mod+p mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# theme / colour
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+set $lightgray #bdae93
+
 bar {
-        status_command i3status
+        font pango:JetBrainsMono Nerd Font 10
+        position bottom
+        status_command i3blocks
+        colors {
+                # bar background color
+                background $bg
+                # text color used for blocks that do not have a color specified.
+                statusline $lightgray
+                # workspaces section
+                #                    border  backgr. text
+                focused_workspace    $lightgray $lightgray $bg
+                inactive_workspace   $darkgray $darkgray $lightgray
+                active_workspace     $darkgray $darkgray $lightgray
+                urgent_workspace     $red $red $bg
+        }
 }
+
+# class                 border|backgr|text|indicator|child_border
+client.focused          $lightgray $lightgray $bg $purple $darkgray
+client.focused_inactive $darkgray $darkgray $lightgray $purple $darkgray
+client.unfocused        $darkgray $darkgray $lightgray $purple $darkgray
+client.urgent           $red $red $white $red $red
+
+# Startup scripts
+exec --no-startup-id ~/.config/i3/startup.sh
