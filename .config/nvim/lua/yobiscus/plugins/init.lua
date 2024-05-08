@@ -1,6 +1,13 @@
 return {
   "ellisonleao/gruvbox.nvim",
   {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      vim.opt.termguicolors = true
+      require('colorizer').setup()
+    end
+  },
+  {
     "j-hui/fidget.nvim",
     config = function()
       require("fidget").setup({

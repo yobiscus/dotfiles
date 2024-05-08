@@ -2,7 +2,7 @@
 set-option -g status "on"
 
 # default statusbar color
-set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
+set-option -g status-style bg=#3c3836,fg=colour223 # bg=bg1, fg=fg1
 
 # default window title colors
 set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
@@ -41,10 +41,10 @@ set-option -g status-right-style none
 set-option -g status-right-length "80"
 set-window-option -g window-status-separator ""
 
-set-option -g status-left "#[bg=colour241,fg=colour248] #S #[bg=colour237,fg=colour241,nobold,noitalics,nounderscore]"
-set-option -g status-right "#[bg=colour237,fg=colour239 nobold, nounderscore, noitalics]#[bg=colour239,fg=colour246] %Y-%m-%d  %H:%M #[bg=colour239,fg=colour248,nobold,noitalics,nounderscore]#[bg=colour248,fg=colour237] #h "
+set-option -g status-left "#[bg=#a89984,fg=#282828] #S #[bg=#3c3836,fg=#a89984,nobold,noitalics,nounderscore]"
+set-option -g status-right "#[bg=#3c3836,fg=#504945 nobold, nounderscore, noitalics]#[bg=#504945,fg=#ebdbb2] %Y-%m-%d  %H:%M #[bg=#504945,fg=#a89984,nobold,noitalics,nounderscore]#[bg=#a89984,fg=#282828,bold] #h "
 
-set-window-option -g window-status-current-format "#[bg=colour214,fg=colour237,nobold,noitalics,nounderscore]#[bg=colour214,fg=colour239] #I #[bg=colour214,fg=colour239,bold] #W #[bg=colour237,fg=colour214,nobold,noitalics,nounderscore]"
-set-window-option -g window-status-format "#[bg=colour239,fg=colour237,noitalics]#[bg=colour239,fg=colour223] #I #[bg=colour239,fg=colour223] #W #[bg=colour237,fg=colour239,noitalics]"
+set-window-option -g window-status-current-format "#[bg=#fabd2f,fg=#3c3836,nobold,noitalics,nounderscore]#[bg=#fabd2f,fg=#282828] #I #[bg=#fabd2f,fg=#282828,bold] #W #[bg=#3c3836,fg=#fabd2f,nobold,noitalics,nounderscore]"
+set-window-option -g window-status-format "#[bg=#504945,fg=#3c3836,noitalics]#[bg=#504945,fg=#ebdbb2] #I #[bg=#504945,fg=#ebdbb2] #W #[bg=#3c3836,fg=#504945,noitalics]"
 
 # vim: set ft=tmux tw=0 nowrap:

@@ -185,16 +185,17 @@ mode "resize" {
 bindsym $mod+p mode "resize"
 
 # theme / colour
-set $bg #282828
+set $bg #3c3836
+set $black #282828
 set $red #cc241d
 set $green #98971a
-set $yellow #d79921
+set $yellow #fabd2f
 set $blue #458588
 set $purple #b16286
 set $aqua #689d68
 set $gray #a89984
-set $darkgray #1d2021
-set $lightgray #bdae93
+set $darkgray #504945
+set $lightgray #a89984
 
 bar {
         font pango:JetBrainsMono Nerd Font 10
@@ -207,7 +208,7 @@ bar {
                 statusline $lightgray
                 # workspaces section
                 #                    border  backgr. text
-                focused_workspace    $lightgray $lightgray $bg
+                focused_workspace    $yellow $yellow $black
                 inactive_workspace   $darkgray $darkgray $lightgray
                 active_workspace     $darkgray $darkgray $lightgray
                 urgent_workspace     $red $red $bg
