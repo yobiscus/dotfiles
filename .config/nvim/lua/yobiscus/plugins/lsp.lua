@@ -90,13 +90,12 @@ return {
           cmp.config.compare.order,
         },
       },
-      sources = cmp.config.sources({
+      sources = {
         -- { name = 'copilot' },
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-      }, {
-        { name = 'buffer' },
-      }),
+        { name = 'luasnip', keyword_length = 2 },
+        { name = 'buffer',  keyword_length = 3 },
+      },
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
