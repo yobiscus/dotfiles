@@ -1,0 +1,37 @@
+output HDMI-1
+off
+output DP-1
+off
+output HDMI-2
+off
+output DP-2
+off
+output HDMI-3
+off
+output DP-3
+off
+output DP-4
+off
+output DVI-I-4-4
+off
+output DVI-I-3-3
+off
+output DVI-I-2-2
+off
+output DVI-I-1-1
+crtc 7
+mode 3840x2160
+pos 1920x0
+rate 60.00
+x-prop-non_desktop 0
+output eDP-1
+crtc 0
+mode 1920x1200
+pos 0x1649
+primary
+rate 60.00
+x-prop-broadcast_rgb Automatic
+x-prop-colorspace Default
+x-prop-max_bpc 12
+x-prop-non_desktop 0
+x-prop-scaling_mode Full aspect

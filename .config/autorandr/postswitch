@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Wallpaper
+# also in ~/.config/i3/startup.sh
+feh --randomize --bg-fill ~/.wallpaper/*
