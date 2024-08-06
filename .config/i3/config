@@ -239,3 +239,4 @@ client.urgent           $red $red $white $red $red
 
 # Startup scripts
 exec --no-startup-id ~/.config/i3/startup.sh
+exec_always --no-startup-id ~/.config/i3/refresh.sh

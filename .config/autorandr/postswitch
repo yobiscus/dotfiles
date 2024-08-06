@@ -1,5 +1,4 @@
 #!/bin/bash
 
-# Wallpaper
-# also in ~/.config/i3/startup.sh
-feh --randomize --bg-fill ~/.wallpaper/*
+# Reload i3 to pickup new layout
+i3-msg restart
