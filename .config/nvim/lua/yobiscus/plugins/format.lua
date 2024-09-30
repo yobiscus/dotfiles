@@ -12,8 +12,11 @@ return {
     },
   },
   opts = {
-    format_on_save = false,
+    format_on_save = true,
     formatters_by_ft = {
+      css = { 'prettier' },
+      html = { 'prettier' },
+      htmldjango = { 'prettier' },
       lua = { 'stylua' },
       markdown = { "markdown-toc" },
       python = function(bufnr)
