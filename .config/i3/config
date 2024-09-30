@@ -30,9 +30,9 @@ exec --no-startup-id dex --autostart --environment i3
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -ef -n
 # disable inactivity timeout and screensaver; xidlehook will control shorter
-# timeout unless
-# apps are in full-screen or sound is playing.
-exec_always --no-startup-id xset -dpms s off
+# timeout unless apps are in full-screen or sound is playing. Also run in
+# .xinitrc, just to be sure.
+exec_always --no-startup-id xset -dpms s off s noblank
 # now configure xidlehook with 10m to standby+lock, and 5m after that for
 # suspend.
 exec --no-startup-id xidlehook \
