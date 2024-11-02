@@ -6,6 +6,9 @@
   output (uinput-sink "KMonad output")
   ;; Undefined keys work as-is
   fallthrough true
+  ;; Allow arbitrary commands:
+  ;;   - Changes i3 layout when switching between colemak and qwerty
+  allow-cmd true
 )
 
 (defsrc
@@ -20,9 +23,12 @@
 (defalias
   ;; Control Panel Layer
   esc (tap-hold-next-release 200 esc (layer-toggle control_panel))
-  ly1 (layer-switch qwerty)
-  ly2 (layer-switch colemak_dh)
-  ly3 (layer-switch M_Base)
+  ly1 (tap-macro (layer-switch qwerty)
+                 (cmd-button "${XDG_CONFIG_HOME:-$HOME/.config}/i3/swplyt.sh qwerty"))
+  ly2 (tap-macro (layer-switch colemak_dh)
+                 (cmd-button "${XDG_CONFIG_HOME:-$HOME/.config}/i3/swplyt.sh colemak"))
+  ly3 (tap-macro (layer-switch M_Base)
+                 (cmd-button "${XDG_CONFIG_HOME:-$HOME/.config}/i3/swplyt.sh colemak"))
 )
 
 (deflayer qwerty
