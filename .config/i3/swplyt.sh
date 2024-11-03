@@ -21,6 +21,7 @@ main() {
     esac
 
     ln -sf "$file" "$SCRIPT_DIR/config"
+    i3-msg restart
 }
 
 main "$@"
