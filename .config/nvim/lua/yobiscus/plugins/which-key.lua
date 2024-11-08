@@ -11,6 +11,7 @@ return {
       local wk = require("which-key")
       -- <leader> groups
       wk.register({
+        e = { desc = "Replace extension" },
         f = { desc = "Find" },
         g = { desc = "Git" },
         l = { desc = "LSP" },
