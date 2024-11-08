@@ -26,7 +26,7 @@ return {
       vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = bufnr, desc = "rename" })
 
       vim.keymap.set('n', '<leader>li', function()
-        vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end, { buffer = bufnr, desc = "toggle inlay hints" })
 
       -- formatting is taken over by ./format.lua
@@ -34,7 +34,7 @@ return {
       --   vim.lsp.buf.format({ async = false, timeout_ms = 5000 })
       -- end, { buffer = bufnr, desc = "format" })
 
-      vim.lsp.inlay_hint.enable(bufnr, true)
+      vim.lsp.inlay_hint.enable(true)
     end)
 
     local cmp = require('cmp')
