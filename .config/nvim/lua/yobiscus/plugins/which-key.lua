@@ -1,6 +1,9 @@
 return {
   {
     "folke/which-key.nvim",
+    dependencies = {
+      'echasnovski/mini.nvim',
+    },
     -- event = "VeryLazy",
     keys = { "<leader>", '"' },
     init = function()
@@ -10,14 +13,14 @@ return {
     config = function()
       local wk = require("which-key")
       -- <leader> groups
-      wk.register({
-        e = { desc = "Replace extension" },
-        f = { desc = "Find" },
-        g = { desc = "Git" },
-        l = { desc = "LSP" },
-        o = { desc = "Open" },
-        x = { desc = "Trouble" },
-      }, { prefix = "<leader>" })
+      wk.add({
+        { "<leader>e", group = "extension" },
+        { "<leader>f", group = "find" },
+        { "<leader>g", group = "git" },
+        { "<leader>l", group = "lsp" },
+        { "<leader>o", group = "open" },
+        { "<leader>x", group = "trouble" },
+      })
     end
   },
 }
