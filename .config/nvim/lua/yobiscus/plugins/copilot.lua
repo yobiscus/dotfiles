@@ -14,7 +14,11 @@ return {
           dismiss = '/',
         },
       },
-      filetypes = { markdown = true },
+      filetypes = {
+        markdown = true,
+        gitcommit = true,
+        yaml = true,
+      },
     },
     config = function(_, opts)
       local cmp = require 'cmp'
@@ -58,6 +62,16 @@ return {
     opts = {
       -- See Configuration section for options
     },
-    -- See Commands section for default commands if you want to lazy load on them
+    config = function()
+      require("CopilotChat").setup()
+      vim.keymap.set('n', '<leader>ccc', '<cmd>CopilotChatToggle<cr>', { desc = "toggle" })
+      vim.keymap.set('n', '<leader>cce', '<cmd>CopilotChatExplain<cr>', { desc = "explain" })
+      vim.keymap.set('n', '<leader>ccr', '<cmd>CopilotChatReview<cr>', { desc = "review" })
+      vim.keymap.set('n', '<leader>ccf', '<cmd>CopilotChatFix<cr>', { desc = "fix" })
+      vim.keymap.set('n', '<leader>cco', '<cmd>CopilotChatOptimize<cr>', { desc = "optimize" })
+      vim.keymap.set('n', '<leader>ccd', '<cmd>CopilotChatDocs<cr>', { desc = "docs" })
+      vim.keymap.set('n', '<leader>cct', '<cmd>CopilotChatTests<cr>', { desc = "tests" })
+      vim.keymap.set('n', '<leader>ccm', '<cmd>CopilotChatCommit<cr>', { desc = "commit message" })
+    end
   },
 }

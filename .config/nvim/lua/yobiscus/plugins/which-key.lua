@@ -14,6 +14,8 @@ return {
       local wk = require("which-key")
       -- <leader> groups
       wk.add({
+        { "<leader>c", group = "copilot" },
+        { "<leader>cc", group = "copilot chat" },
         { "<leader>e", group = "extension" },
         { "<leader>f", group = "find" },
         { "<leader>g", group = "git" },
