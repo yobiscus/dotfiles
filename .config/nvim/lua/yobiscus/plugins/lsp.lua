@@ -8,6 +8,7 @@ return {
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
     { 'L3MON4D3/LuaSnip' },
+    { 'saadparwaiz1/cmp_luasnip' },
     { 'onsails/lspkind.nvim' },
   },
   config = function()
@@ -38,13 +39,16 @@ return {
     end)
 
     local cmp = require('cmp')
-    local cmp_action = require('lsp-zero').cmp_action()
-    local has_words_before = function()
-      if vim.api.nvim_get_option_value("buftype", {}) == "prompt" then return false end
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-    end
+    local luasnip = require('luasnip')
+
+    -- Inside a snippet, use backspace to remove the placeholder.
+    vim.keymap.set('s', '<BS>', '<C-O>s')
+
     cmp.setup({
+      -- Disable preselect. On enter, the first thing will be used if nothing
+      -- is selected.
+      preselect = cmp.PreselectMode.None,
+      -- Add icons to the completion menu.
       formatting = {
         fields = { 'menu', 'abbr', 'kind' },
         format = require('lspkind').cmp_format({
@@ -58,44 +62,68 @@ return {
             path = '🖫',
             nvim_lua = 'Π',
           },
+          symbol_map = {
+            Copilot = "",
+          },
         }),
       },
-      mapping = cmp.mapping.preset.insert({
-        ["<Tab>"] = vim.schedule_wrap(function(fallback)
-          if cmp.visible() and has_words_before() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      view = {
+        -- Explicitly request documentation.
+        docs = { auto_open = false },
+      },
+      mapping = cmp.mapping.preset.insert {
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<CR>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+        -- Explicitly request completions.
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['/'] = cmp.mapping.close(),
+        -- Overload tab to accept Copilot suggestions.
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          local copilot = require 'copilot.suggestion'
+
+          if copilot.is_visible() then
+            copilot.accept()
+          elseif cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end
-        end),
-        ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-      }),
-      sorting = {
-        priority_weight = 2,
-        comparators = {
-          -- require("copilot_cmp.comparators").prioritize,
-          -- Below is the default comparitor list and order for nvim-cmp
-          cmp.config.compare.offset,
-          -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          cmp.config.compare.recently_used,
-          cmp.config.compare.locality,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-        },
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.expand_or_locally_jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<C-d>'] = function()
+          if cmp.visible_docs() then
+            cmp.close_docs()
+          else
+            cmp.open_docs()
+          end
+        end,
       },
-      sources = {
-        -- { name = 'copilot' },
+      sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip', keyword_length = 2 },
-        { name = 'buffer',  keyword_length = 3 },
-      },
+        { name = 'luasnip' },
+        { name = 'crates' },
+      }, {
+        { name = 'buffer' },
+      }),
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
