@@ -22,7 +22,7 @@
 
 (defalias
   ;; Control Panel Layer
-  esc (tap-hold-next-release 200 (around esc (pause 100)) (layer-toggle control_panel))
+  esc (tap-hold-next-release 200 (around esc (pause 35)) (layer-toggle control_panel))
   ly1 (tap-macro (layer-switch qwerty)
                  (cmd-button "${XDG_CONFIG_HOME:-$HOME/.config}/i3/swplyt.sh qwerty"))
   ly2 (tap-macro (layer-switch colemak_dh)
