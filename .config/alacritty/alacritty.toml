@@ -83,5 +83,7 @@ bindings = [
     { chars = "\u001bz",           key = "Z",        mods = "Alt"},
     { chars = "\u001b[",           key = "LBracket", mods = "Alt"},
     { chars = "\u001b]",           key = "RBracket", mods = "Alt"},
+    # remap <C-;> to <C-\>
+    { chars = "\u001c",            key = "Semicolon",mods = "Control"},
 ]
 
