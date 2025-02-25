@@ -40,57 +40,48 @@ family = "JetBrainsMono Nerd Font"
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 
-[[keyboard.bindings]]
-chars = "\u001B0"
-key = "Key0"
-mods = "Alt"
+[keyboard]
+bindings = [
+    # Hotkeys
+    { action = "SpawnNewInstance", key = "N",        mods = "Control|Shift"},
+    # Passthrough
+    { chars = "\u001B0",           key = "Key0",     mods = "Alt"},
+    { chars = "\u001B1",           key = "Key1",     mods = "Alt"},
+    { chars = "\u001B2",           key = "Key2",     mods = "Alt"},
+    { chars = "\u001B3",           key = "Key3",     mods = "Alt"},
+    { chars = "\u001B4",           key = "Key4",     mods = "Alt"},
+    { chars = "\u001B5",           key = "Key5",     mods = "Alt"},
+    { chars = "\u001B6",           key = "Key6",     mods = "Alt"},
+    { chars = "\u001B7",           key = "Key7",     mods = "Alt"},
+    { chars = "\u001B8",           key = "Key8",     mods = "Alt"},
+    { chars = "\u001B9",           key = "Key9",     mods = "Alt"},
+    { chars = "\u001ba",           key = "A",        mods = "Alt"},
+    { chars = "\u001bb",           key = "B",        mods = "Alt"},
+    { chars = "\u001bc",           key = "C",        mods = "Alt"},
+    { chars = "\u001bd",           key = "D",        mods = "Alt"},
+    { chars = "\u001be",           key = "E",        mods = "Alt"},
+    { chars = "\u001bf",           key = "F",        mods = "Alt"},
+    { chars = "\u001bg",           key = "G",        mods = "Alt"},
+    { chars = "\u001bh",           key = "H",        mods = "Alt"},
+    { chars = "\u001bi",           key = "I",        mods = "Alt"},
+    { chars = "\u001bj",           key = "J",        mods = "Alt"},
+    { chars = "\u001bk",           key = "K",        mods = "Alt"},
+    { chars = "\u001bl",           key = "L",        mods = "Alt"},
+    { chars = "\u001bm",           key = "M",        mods = "Alt"},
+    { chars = "\u001bn",           key = "N",        mods = "Alt"},
+    { chars = "\u001bo",           key = "O",        mods = "Alt"},
+    { chars = "\u001bp",           key = "P",        mods = "Alt"},
+    { chars = "\u001bq",           key = "Q",        mods = "Alt"},
+    { chars = "\u001br",           key = "R",        mods = "Alt"},
+    { chars = "\u001bs",           key = "S",        mods = "Alt"},
+    { chars = "\u001bt",           key = "T",        mods = "Alt"},
+    { chars = "\u001bu",           key = "U",        mods = "Alt"},
+    { chars = "\u001bv",           key = "V",        mods = "Alt"},
+    { chars = "\u001bw",           key = "W",        mods = "Alt"},
+    { chars = "\u001bx",           key = "X",        mods = "Alt"},
+    { chars = "\u001by",           key = "Y",        mods = "Alt"},
+    { chars = "\u001bz",           key = "Z",        mods = "Alt"},
+    { chars = "\u001b[",           key = "LBracket", mods = "Alt"},
+    { chars = "\u001b]",           key = "RBracket", mods = "Alt"},
+]
 
-[[keyboard.bindings]]
-chars = "\u001B1"
-key = "Key1"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B2"
-key = "Key2"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B3"
-key = "Key3"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B4"
-key = "Key4"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B5"
-key = "Key5"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B6"
-key = "Key6"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B7"
-key = "Key7"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B8"
-key = "Key8"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001B9"
-key = "Key9"
-mods = "Alt"
-
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "N"
-mods = "Control|Shift"
