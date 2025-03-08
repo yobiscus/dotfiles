@@ -3,6 +3,7 @@
 packages=(
   i3
   i3blocks
+  j4-dmenu-desktop
   fish
   keychain
 )
