@@ -81,11 +81,11 @@ return {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
+          -- select = true,
         },
         -- Explicitly request completions.
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-/>'] = cmp.mapping.close(),
+        ['<Esc>'] = cmp.mapping.close(),
         -- Overload tab to accept Copilot suggestions.
         ['<Tab>'] = cmp.mapping(function(fallback)
           local copilot = require 'copilot.suggestion'
