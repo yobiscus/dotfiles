@@ -151,6 +151,13 @@ return {
                   typeHints = { enable = true },
                   implicitDrops = { enable = true },
                 },
+                procMacro = {
+                  ignored = {
+                    leptos_macro = {
+                      "server",
+                    },
+                  },
+                },
               }
             }
           })
