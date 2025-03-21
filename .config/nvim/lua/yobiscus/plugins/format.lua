@@ -26,6 +26,7 @@ return {
           return { "isort", "black" }
         end
       end,
+      rust = { "rustfmt", lsp_format = "fallback" },
     },
   }
 }
