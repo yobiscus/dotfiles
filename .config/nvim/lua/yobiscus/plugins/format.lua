@@ -17,6 +17,8 @@ return {
       css = { 'prettier' },
       html = { 'prettier' },
       htmldjango = { 'prettier' },
+      json = { 'jq' },
+      jsonc = { 'jq' },
       lua = { 'stylua' },
       markdown = { "markdown-toc" },
       python = function(bufnr)
@@ -26,7 +28,7 @@ return {
           return { "isort", "black" }
         end
       end,
-      rust = { "rustfmt", lsp_format = "fallback" },
+      rust = { "rustfmt", "leptosfmt", lsp_format = "fallback" },
     },
   }
 }
