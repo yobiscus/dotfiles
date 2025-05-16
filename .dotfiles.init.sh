@@ -118,5 +118,36 @@ if [[ ! -d .dotfiles ]]; then
     dotfiles checkout
 fi
 
+if [[ -z $(git config --global user.name) ]]; then
+    echo ""
+    echo "Configuring git..."
+    read -p "Full name: " name
+    git config --global user.name "$name"
+    read -p "Email: " email
+    git config --global user.email "$email"
+fi
+
+if [[ -z $(gpg --list-secret-keys) ]]; then
+    echo ""
+    echo "Creating gpg keys..."
+    gpg --batch --gen-key <<EOF
+Key-Type: 1
+Key-Length: 2048
+Subkey-Type: 1
+Subkey-Length: 2048
+Name-Real: $(git config --global user.name)
+Name-Email: $(git config --global user.email)
+Expire-Date: 0
+EOF
+    gpg --export --armour "$(git config --global user.email)"
+fi
+
+if [[ ! -e .ssh/id_ed25519.pub ]]; then
+    echo ""
+    echo "Creating ssh keys..."
+    ssh-keygen -t ed25519 -C "$(git config --global user.email)" -f .ssh/id_ed25519
+    cat .ssh/id_ed25519.pub
+fi
+
 echo ""
 echo "Done!"
