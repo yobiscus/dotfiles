@@ -13,6 +13,13 @@ if ! grep -q DISTRIB_ID=Ubuntu /etc/lsb-release; then
     exit 1
 fi
 
+arch=$(uname -m)
+if [[ "$arch" != "x86_64" ]]; then
+    echo "Error: Arch '$arch' not supported by init script." >&2
+    exit 1
+fi
+arch_alt=x64
+
 #
 # Settings
 #
@@ -24,8 +31,10 @@ apt_pkgs=(
     cmake
     curl
     git
+    golang
     i3
     make
+    python3
     tmux
     unzip
     zsh
@@ -38,8 +47,15 @@ cargo_pkgs=(
 
 snap_pkgs=(
     alacritty:"--classic"
-    nvim:"--classic"
-    node:"--classic"
+)
+
+go_pkgs=(
+    github.com/gopasspw/gopass@latest
+)
+
+archived_pkgs=(
+    "nvim=https://github.com/neovim/neovim/releases/download/v0.11.1/nvim-linux-${arch}.tar.gz"
+    "node=https://nodejs.org/dist/v22.15.1/node-v22.15.1-linux-${arch_alt}.tar.xz"
 )
 
 fonts=(
@@ -68,8 +84,8 @@ if [[ ${#snap_pkgs[@]} -gt 0 ]]; then
     echo ""
     echo "Installing snap packages..."
     for p in "${snap_pkgs[@]}"; do
-        name="${p%%:*}"
-        opts="${p#*:}"
+        name=${p%%:*}
+        opts=${p#*:}
         sudo snap install "$name" $opts
     done
 fi
@@ -83,6 +99,31 @@ if [[ ${#cargo_pkgs[@]} -gt 0 ]]; then
     echo ""
     echo "Installing cargo packages..."
     cargo install "${cargo_pkgs[@]}"
+fi
+
+if [[ ${#go_pkgs[@]} -gt 0 ]]; then
+    echo ""
+    echo "Installing go packages..."
+    go install "${go_pkgs[@]}"
+fi
+
+if [[ ${#archived_pkgs[@]} -gt 0 ]]; then
+    echo ""
+    echo "Installing archived packages..."
+    for p in "${archived_pkgs[@]}"; do
+        name=${p%%=*}
+        [[ ! -d /opt/$name ]] || continue
+        url=${p#*=}
+        bname=${url##*/}
+        # install in /opt
+        mkdir -p "/tmp/$name"
+        curl -o "/tmp/$name/$bname" "${url}"
+        tar -C "/tmp/$name" -xvf "/tmp/$name/$bname"
+        rm "/tmp/$name/$bname"
+        sudo mv /tmp/$name /opt/$name
+        # create symlink in $PATH
+        ln -s $(fd "^${name}$" /opt/$name --type executable --max-results 1) .local/bin/
+    done
 fi
 
 if [[ ${#fonts[@]} -gt 0 ]]; then
