@@ -24,8 +24,6 @@ arch_alt=x64
 # Settings
 #
 
-shell=zsh
-
 apt_pkgs=(
     clang
     cmake
@@ -176,7 +174,7 @@ fi
 #
 
 function dotfiles {
-    git --git-dir=$.dotfiles --work-tree=. "$@"
+    git --git-dir=.dotfiles --work-tree=. "$@"
 }
 
 if [[ ! -d .dotfiles ]]; then
@@ -190,9 +188,9 @@ fi
 if [[ -z $(git config --global user.name) ]]; then
     echo ""
     echo "Configuring git..."
-    read -p "Full name: " name
+    read -rp "Full name: " name
     git config --global user.name "$name"
-    read -p "Email: " email
+    read -rp "Email: " email
     git config --global user.email "$email"
 fi
 
