@@ -169,7 +169,6 @@ if [[ ! -e .local/bin/starship ]]; then
     echo ""
     echo "Installing starship prompt..."
     curl -sS https://starship.rs/install.sh | { sh -s -- -y -b .local/bin >/dev/null; }
-    starship preset pure-preset -o ~/.config/starship.toml
 fi
 
 #
