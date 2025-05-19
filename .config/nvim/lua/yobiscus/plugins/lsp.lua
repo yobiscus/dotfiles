@@ -52,18 +52,16 @@ return {
       },
       view = {
         -- Explicitly request documentation.
-        docs = { auto_open = false },
+        -- docs = { auto_open = false },
       },
       mapping = cmp.mapping.preset.insert {
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           -- select = true,
         },
         -- Explicitly request completions.
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<Esc>'] = cmp.mapping.close(),
+        ['<C-/>'] = cmp.mapping.close(),
         -- Overload tab to accept Copilot suggestions.
         ['<Tab>'] = cmp.mapping(function(fallback)
           local copilot = require 'copilot.suggestion'
