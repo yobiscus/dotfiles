@@ -141,7 +141,7 @@ if [[ ${#archived_pkgs[@]} -gt 0 ]]; then
         tar -C "$destdir" -xf "$destdir/$bname"
         # create symlink in $PATH
         for name in "${names[@]}"; do
-            ln -sfr $(fd "^${name}$" "$destdir" --type executable --max-results 1) .local/bin/
+            ln -sfr "$(fd "^${name}$" "$destdir" --type executable --max-results 1)" .local/bin/
         done
     done
 fi
