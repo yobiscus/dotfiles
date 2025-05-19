@@ -55,7 +55,7 @@ go_pkgs=(
 
 archived_pkgs=(
     "nvim=https://github.com/neovim/neovim/releases/download/v0.11.1/nvim-linux-${arch}.tar.gz"
-    "node=https://nodejs.org/dist/v22.15.1/node-v22.15.1-linux-${arch_alt}.tar.xz"
+    "node,npm,npx=https://nodejs.org/dist/v22.15.1/node-v22.15.1-linux-${arch_alt}.tar.xz"
 )
 
 fonts=(
@@ -107,22 +107,44 @@ if [[ ${#go_pkgs[@]} -gt 0 ]]; then
     go install "${go_pkgs[@]}"
 fi
 
+split_string() {
+    local -n ref=$3
+    [[ -n $2 ]] && local IFS=$2
+    ref+=($1)
+    local IFS=$'\n'
+    echo "${ref[*]}"
+}
+
 if [[ ${#archived_pkgs[@]} -gt 0 ]]; then
     echo ""
     echo "Installing archived packages..."
     for p in "${archived_pkgs[@]}"; do
-        name=${p%%=*}
-        [[ ! -d /opt/$name ]] || continue
+        installed=1
+        names=()
+        split_string "${p%%=*}" , names
+        for name in "${names[@]}"; do
+            [[ ! -x ".local/bin/$name" ]] && installed=
+        done
+        [[ ! $installed ]] || continue
+
+        if [[ -z "${names[0]}" ]]; then
+            echo "Error: Bad archive format '$p'."
+            exit 1
+        fi
+
+        # download to .local/opt
         url=${p#*=}
         bname=${url##*/}
-        # install in /opt
-        mkdir -p "/tmp/$name"
-        curl -o "/tmp/$name/$bname" "${url}"
-        tar -C "/tmp/$name" -xvf "/tmp/$name/$bname"
-        rm "/tmp/$name/$bname"
-        sudo mv /tmp/$name /opt/$name
+        destdir=.local/opt/${names[0]}
+        rm -rf "$destdir"
+        mkdir -p "$destdir"
+        curl -o "$destdir/$bname" "${url}"
+        # extract
+        tar -C "$destdir" -xf "$destdir/$bname"
         # create symlink in $PATH
-        ln -s $(fd "^${name}$" /opt/$name --type executable --max-results 1) .local/bin/
+        for name in "${names[@]}"; do
+            ln -sfr $(fd "^${name}$" "$destdir" --type executable --max-results 1) .local/bin/
+        done
     done
 fi
 
