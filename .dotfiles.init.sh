@@ -182,7 +182,7 @@ if [[ ! -d .dotfiles ]]; then
     echo "Cloning dotfiles..."
     git clone --bare https://github.com/yobiscus/dotfiles.git -b v2 .dotfiles
     dotfiles config --local status.showUntrackedFiles no
-    dotfiles checkout
+    dotfiles checkout -f
 fi
 
 if [[ -z $(git config --global user.name) ]]; then
