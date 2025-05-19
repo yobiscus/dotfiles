@@ -109,8 +109,6 @@ split_string() {
     local -n ref=$3
     [[ -n $2 ]] && local IFS=$2
     ref+=($1)
-    local IFS=$'\n'
-    echo "${ref[*]}"
 }
 
 if [[ ${#archived_pkgs[@]} -gt 0 ]]; then
@@ -154,9 +152,7 @@ if [[ ${#fonts[@]} -gt 0 ]]; then
         fqname=${url##*/}
         name=${fqname%.*}
         [[ ! -d ".fonts/$name" ]] || continue
-        set -x
         curl -o ".fonts/$fqname" "$url"
-        set +x
         [[ "$fqname" == *.zip ]] || { echo "Unsupported font extension for $fqname" >&2; continue; }
         unzip ".fonts/$fqname" -d ".fonts/$name"
         fc-cache -vr
