@@ -54,6 +54,7 @@ go_pkgs=(
 archived_pkgs=(
     "nvim=https://github.com/neovim/neovim/releases/download/v0.11.1/nvim-linux-${arch}.tar.gz"
     "node,npm,npx=https://nodejs.org/dist/v22.15.1/node-v22.15.1-linux-${arch_alt}.tar.xz"
+    "kitty,kitten=https://github.com/kovidgoyal/kitty/releases/download/v0.42.1/kitty-0.42.1-x86_64.txz"
 )
 
 fonts=(

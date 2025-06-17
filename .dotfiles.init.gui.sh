@@ -28,7 +28,6 @@ v_hyprgraphics=v0.1.3
 #
 # # Install deps
 sudo apt install -y \
-    kitty \
     meson wget build-essential ninja-build cmake-extras cmake gettext \
     gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev \
     libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev \
