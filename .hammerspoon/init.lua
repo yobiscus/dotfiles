@@ -168,31 +168,52 @@ local function resizeWindow(direction, mod)
   LastWctrl:updateFrame()
 end
 
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "J",       function() positionWindow("left") end)
+local function getFocusedWindowName()
+  local win = hs.window.focusedWindow()
+  hs.alert.show(win:title())
+end
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "`",       function() getFocusedWindowName() end)
+
+local function focusWindowByName(name)
+  local win = hs.window.get(name)
+  if win == nil then
+    hs.alert.show("No win with name " .. name)
+    return
+  end
+  win:focus()
+end
+
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "1",       function() focusWindowByName("jogravel@ott-ads-610:~") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "2",       function() focusWindowByName("jogravel@ott-orb-103:~") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "3",       function() focusWindowByName("jogravel@ott-ads-1234:~") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "4",       function() focusWindowByName("jogravel@ott-pi-lnx-09:~") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "5",       function() focusWindowByName("jogravel@ott-pi-lnx-42:~") end)
+
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "H",       function() positionWindow("left") end)
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "left",    function() positionWindow("left") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, ";",       function() positionWindow("right") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "L",       function() positionWindow("right") end)
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "right",   function() positionWindow("right") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "L",       function() positionWindow("top") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "K",       function() positionWindow("top") end)
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "up",      function() positionWindow("top") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "K",       function() positionWindow("bottom") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "J",       function() positionWindow("bottom") end)
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "down",    function() positionWindow("bottom") end)
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "space",   function() positionWindow("zoom") end)
 
-hs.hotkey.bind({ "alt", "ctrl" }, "J",              function() resizeWindow("left") end)
+hs.hotkey.bind({ "alt", "ctrl" }, "H",              function() resizeWindow("left") end)
 hs.hotkey.bind({ "alt", "ctrl" }, "left",           function() resizeWindow("left") end)
-hs.hotkey.bind({ "alt", "ctrl" }, ";",              function() resizeWindow("right") end)
+hs.hotkey.bind({ "alt", "ctrl" }, "L",              function() resizeWindow("right") end)
 hs.hotkey.bind({ "alt", "ctrl" }, "right",          function() resizeWindow("right") end)
-hs.hotkey.bind({ "alt", "ctrl" }, "L",              function() resizeWindow("up") end)
+hs.hotkey.bind({ "alt", "ctrl" }, "K",              function() resizeWindow("up") end)
 hs.hotkey.bind({ "alt", "ctrl" }, "up",             function() resizeWindow("up") end)
-hs.hotkey.bind({ "alt", "ctrl" }, "K",              function() resizeWindow("down") end)
+hs.hotkey.bind({ "alt", "ctrl" }, "J",              function() resizeWindow("down") end)
 hs.hotkey.bind({ "alt", "ctrl" }, "down",           function() resizeWindow("down") end)
-hs.hotkey.bind({ "alt", "ctrl", "shift" }, "J",     function() resizeWindow("left", "shift") end)
+hs.hotkey.bind({ "alt", "ctrl", "shift" }, "H",     function() resizeWindow("left", "shift") end)
 hs.hotkey.bind({ "alt", "ctrl", "shift" }, "left",  function() resizeWindow("left", "shift") end)
-hs.hotkey.bind({ "alt", "ctrl", "shift" }, ";",     function() resizeWindow("right", "shift") end)
+hs.hotkey.bind({ "alt", "ctrl", "shift" }, "L",     function() resizeWindow("right", "shift") end)
 hs.hotkey.bind({ "alt", "ctrl", "shift" }, "right", function() resizeWindow("right", "shift") end)
-hs.hotkey.bind({ "alt", "ctrl", "shift" }, "L",     function() resizeWindow("up", "shift") end)
+hs.hotkey.bind({ "alt", "ctrl", "shift" }, "K",     function() resizeWindow("up", "shift") end)
 hs.hotkey.bind({ "alt", "ctrl", "shift" }, "up",    function() resizeWindow("up", "shift") end)
-hs.hotkey.bind({ "alt", "ctrl", "shift" }, "K",     function() resizeWindow("down", "shift") end)
+hs.hotkey.bind({ "alt", "ctrl", "shift" }, "J",     function() resizeWindow("down", "shift") end)
 hs.hotkey.bind({ "alt", "ctrl", "shift" }, "down",  function() resizeWindow("down", "shift") end)
 
 --
