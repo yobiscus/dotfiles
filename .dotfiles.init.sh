@@ -8,8 +8,9 @@ cd "$HOME"
 # Preflight check
 #
 
-if ! grep -q DISTRIB_ID=Ubuntu /etc/lsb-release; then
-    echo "Error: Distro not supported by init script." >&2
+os=$(uname -o)
+if [[ "$os" != "GNU/Linux" ]]; then
+    echo "Error: OS '$os' not supported by init script." >&2
     exit 1
 fi
 
@@ -23,6 +24,8 @@ arch_alt=x64
 #
 # Settings
 #
+
+grep -q DISTRIB_ID=Ubuntu /etc/lsb-release 2>/dev/null && is_ubuntu=1
 
 apt_pkgs=(
     clang
@@ -51,8 +54,8 @@ go_pkgs=(
 )
 
 archived_pkgs=(
-    "nvim=https://github.com/neovim/neovim/releases/download/v0.11.1/nvim-linux-${arch}.tar.gz"
-    "node,npm,npx=https://nodejs.org/dist/v22.15.1/node-v22.15.1-linux-${arch_alt}.tar.xz"
+    "nvim=https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-${arch}.tar.gz"
+    "node,npm,npx=https://nodejs.org/dist/v22.16.0/node-v22.16.0-linux-${arch_alt}.tar.xz"
     "kitty,kitten=https://github.com/kovidgoyal/kitty/releases/download/v0.42.1/kitty-0.42.1-x86_64.txz"
 )
 
@@ -64,13 +67,15 @@ fonts=(
 # Install
 #
 
+echo "Starting installation..."
+
 function curl() {
     /usr/bin/curl --proto '=https' --tlsv1.2 -sSfL "$@"
 }
 
 mkdir -p ".local/bin"
 
-if [[ ${#apt_pkgs[@]} -gt 0 ]]; then
+if [[ $is_ubuntu && ${#apt_pkgs[@]} -gt 0 ]]; then
     echo "Installing apt packages..."
     sudo apt update
     sudo apt dist-upgrade -y
@@ -78,7 +83,7 @@ if [[ ${#apt_pkgs[@]} -gt 0 ]]; then
     sudo apt autoremove --purge -y
 fi
 
-if [[ ${#snap_pkgs[@]} -gt 0 ]]; then
+if [[ $is_ubuntu && ${#snap_pkgs[@]} -gt 0 ]]; then
     echo ""
     echo "Installing snap packages..."
     for p in "${snap_pkgs[@]}"; do
@@ -99,7 +104,8 @@ if [[ ${#cargo_pkgs[@]} -gt 0 ]]; then
     cargo install "${cargo_pkgs[@]}"
 fi
 
-if [[ ${#go_pkgs[@]} -gt 0 ]]; then
+# ubuntu only for now, haven't confirmed go is installed otherwise
+if [[ $is_ubuntu && ${#go_pkgs[@]} -gt 0 ]]; then
     echo ""
     echo "Installing go packages..."
     go install "${go_pkgs[@]}"
@@ -165,9 +171,14 @@ if [[ ! -e .local/bin/starship ]]; then
     curl -sS https://starship.rs/install.sh | { sh -s -- -y -b .local/bin >/dev/null; }
 fi
 
+echo "Installation done!"
+[[ $DF_INSTALL_ONLY ]] && exit
+
 #
 # Configure
 #
+
+echo "Starting configuration..."
 
 function dotfiles {
     git --git-dir=.dotfiles --work-tree=. "$@"
@@ -213,4 +224,4 @@ if [[ ! -e .ssh/id_ed25519.pub ]]; then
 fi
 
 echo ""
-echo "Done!"
+echo "Configuration done!"
