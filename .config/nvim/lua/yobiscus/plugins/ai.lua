@@ -1,5 +1,51 @@
 return {
   {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "ravitemer/mcphub.nvim",
+    },
+    config = function()
+      require("codecompanion").setup({
+        extensions = {
+          mcphub = {
+            callback = "mcphub.extensions.codecompanion",
+            opts = {
+              make_vars = true,
+              make_slash_commands = true,
+              show_result_in_chat = true
+            }
+          }
+        },
+        -- display = {
+        --   chat = {},
+        --   diff = { provider = "mini_diff" },
+        -- },
+      })
+    end,
+  },
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    build = "npm install -g mcp-hub@latest",
+    config = function()
+      require('mcphub').setup()
+    end,
+  },
+  -- {
+  --   "echasnovski/mini.diff",
+  --   config = function()
+  --     local diff = require("mini.diff")
+  --     diff.setup({
+  --       -- Disabled by default
+  --       source = diff.gen_source.none(),
+  --     })
+  --   end,
+  -- },
+  {
     "zbirenbaum/copilot.lua",
     opts = {
       panel = { enabled = false },
@@ -50,27 +96,5 @@ return {
         end,
       })
     end,
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-    },
-    build = "make tiktoken", -- Only on MacOS or Linux
-    opts = {
-      -- See Configuration section for options
-    },
-    config = function()
-      require("CopilotChat").setup()
-      vim.keymap.set('n', '<leader>ccc', '<cmd>CopilotChatToggle<cr>', { desc = "toggle" })
-      vim.keymap.set('n', '<leader>cce', '<cmd>CopilotChatExplain<cr>', { desc = "explain" })
-      vim.keymap.set('n', '<leader>ccr', '<cmd>CopilotChatReview<cr>', { desc = "review" })
-      vim.keymap.set('n', '<leader>ccf', '<cmd>CopilotChatFix<cr>', { desc = "fix" })
-      vim.keymap.set('n', '<leader>cco', '<cmd>CopilotChatOptimize<cr>', { desc = "optimize" })
-      vim.keymap.set('n', '<leader>ccd', '<cmd>CopilotChatDocs<cr>', { desc = "docs" })
-      vim.keymap.set('n', '<leader>cct', '<cmd>CopilotChatTests<cr>', { desc = "tests" })
-      vim.keymap.set('n', '<leader>ccm', '<cmd>CopilotChatCommit<cr>', { desc = "commit message" })
-    end
   },
 }
