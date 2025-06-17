@@ -44,7 +44,6 @@ cargo_pkgs=(
 )
 
 snap_pkgs=(
-    alacritty:"--classic"
 )
 
 go_pkgs=(
