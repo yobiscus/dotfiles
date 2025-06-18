@@ -5,9 +5,21 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "ravitemer/mcphub.nvim",
+      "zbirenbaum/copilot.lua",
+    },
+    keys = {
+      { "<leader>oac", "<cmd>CodeCompanionChat Toggle<cr>", desc="AI Chat" },
+      { "<leader>oax", "<cmd>CodeCompanionActions<cr>", desc="AI Actions" },
     },
     config = function()
       require("codecompanion").setup({
+        adapters = {
+          copilot = function()
+            return require("codecompanion.adapters").extend("copilot", {
+              schema = { model = { default = "claude-sonnet-4" } }
+            })
+          end,
+        },
         extensions = {
           mcphub = {
             callback = "mcphub.extensions.codecompanion",
@@ -47,6 +59,7 @@ return {
   -- },
   {
     "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
     opts = {
       panel = { enabled = false },
       suggestion = {
