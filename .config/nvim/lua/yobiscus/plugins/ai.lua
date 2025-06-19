@@ -14,11 +14,14 @@ return {
     config = function()
       require("codecompanion").setup({
         adapters = {
-          copilot = function()
-            return require("codecompanion.adapters").extend("copilot", {
-              schema = { model = { default = "claude-sonnet-4" } }
-            })
-          end,
+          -- Previously changed copilot to use claude-sonnet-4 by default.
+          -- This is now considered a premium model with a request cap, so
+          -- leave the default (gpt-4.1) instead.
+          -- copilot = function()
+          --   return require("codecompanion.adapters").extend("copilot", {
+          --     schema = { model = { default = "claude-sonnet-4" } }
+          --   })
+          -- end,
         },
         extensions = {
           mcphub = {
