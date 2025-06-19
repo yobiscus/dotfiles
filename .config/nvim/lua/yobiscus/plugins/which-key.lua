@@ -4,8 +4,7 @@ return {
     dependencies = {
       'echasnovski/mini.nvim',
     },
-    -- event = "VeryLazy",
-    keys = { "<leader>", '"' },
+    event = "VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300

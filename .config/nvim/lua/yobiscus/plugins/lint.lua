@@ -6,7 +6,6 @@ return {
     lint.linters_by_ft = {
       markdown = { "vale" },
       rst = { "vale" },
-      sh = { "shellcheck" },
       yaml = { "yamllint" },
       -- python = { "pylint", "mypy" },
     }
