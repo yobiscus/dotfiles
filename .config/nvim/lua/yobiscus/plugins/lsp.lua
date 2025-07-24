@@ -15,6 +15,8 @@ return {
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, { desc = "toggle inlay hints" })
     vim.lsp.inlay_hint.enable(true)
+    vim.keymap.set(
+      'n', 'gl', vim.diagnostic.open_float, { desc = "open diagnostic" })
 
     local cmp = require('cmp')
     local luasnip = require('luasnip')
