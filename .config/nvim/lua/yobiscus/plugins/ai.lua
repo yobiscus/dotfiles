@@ -22,6 +22,12 @@ return {
           --     schema = { model = { default = "claude-sonnet-4" } }
           --   })
           -- end,
+          -- Default to gpt-5 instead
+          copilot = function()
+            return require("codecompanion.adapters").extend("copilot", {
+              schema = { model = { default = "gpt-5" } }
+            })
+          end,
         },
         extensions = {
           mcphub = {
