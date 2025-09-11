@@ -36,8 +36,23 @@ return {
         nerd_font_variant = 'mono'
       },
 
-      -- (Default) Only show the documentation popup when manually triggered
-      completion = { documentation = { auto_show = false } },
+      cmdline = {
+        keymap = {
+          preset = 'cmdline',
+          ['<Tab>'] = { 'show_and_insert', 'select_and_accept' }
+        }
+      },
+
+      -- Show documentation by default, show borders around text
+      completion = {
+        menu = {
+          border = "rounded",
+        },
+        documentation = {
+          auto_show = true,
+          window = { border = "rounded" },
+        },
+      },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
