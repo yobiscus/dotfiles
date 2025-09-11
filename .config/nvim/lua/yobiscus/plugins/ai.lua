@@ -1,7 +1,12 @@
 return {
   {
+    "banjo/contextfiles.nvim",
+    dev = true,
+  },
+  {
     "olimorris/codecompanion.nvim",
     dependencies = {
+      "banjo/contextfiles.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "ravitemer/mcphub.nvim",
@@ -36,6 +41,16 @@ return {
               make_vars = true,
               make_slash_commands = true,
               show_result_in_chat = true
+            }
+          },
+          contextfiles = {
+            opts = {
+              slash_command = {
+                ctx_opts = {
+                  context_files = { ".github/copilot-instructions.md", },
+                  context_dir = ".github/instructions",
+                }
+              }
             }
           }
         },
