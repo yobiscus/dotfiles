@@ -76,4 +76,15 @@ fi
 . "$HOME/.cargo/env"
 PATH=$PATH:$HOME/go/bin
 
+gpg_key=$(gpg -K | grep -EA1 '^sec ' | grep -Ev '^sec ')
+eval "$(keychain --eval --agents "gpg,ssh" id_ed25519 "$gpg_key")"
+
+export VISUAL=nvim
+export EDITOR=nvim
+
+eval "$(direnv hook bash)"
 eval "$(starship init bash)"
+
+# Task Master aliases added on 6/29/2025
+alias tm='task-master'
+alias taskmaster='task-master'

@@ -223,5 +223,9 @@ if [[ ! -e .ssh/id_ed25519.pub ]]; then
     cat .ssh/id_ed25519.pub
 fi
 
+if [[ -n "$INIT_GUI" ]]; then
+    .dotfiles.init.gui.sh
+fi
+
 echo ""
 echo "Configuration done!"

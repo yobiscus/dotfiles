@@ -25,9 +25,11 @@ v_aquamarine=v0.8.0
 v_hyprlang=v0.6.3
 v_hyprcursor=v0.1.12
 v_hyprgraphics=v0.1.3
+v_hyprland_qtutils=v0.1.4
 #
 # # Install deps
 sudo apt install -y \
+    wofi \
     meson wget build-essential ninja-build cmake-extras cmake gettext \
     gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev \
     libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev \
@@ -39,7 +41,8 @@ sudo apt install -y \
     libxcb-xinput-dev libtomlplusplus3 libre2-dev \
     doxygen graphviz xmlto xsltproc libpugixml-dev libgbm-dev \
     libzip-dev librsvg2-dev libtomlplusplus-dev libmagic-dev \
-    libspng-dev libxcb-errors-dev
+    libspng-dev libxcb-errors-dev qt6-base-dev qt6-declarative-dev \
+    qt6-wayland-dev qt6-wayland-private-dev qt6-base-private-dev
 
 # Prepare environment
 PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
@@ -163,13 +166,27 @@ export PKG_CONFIG_PATH
         -j "$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)"
     sudo cmake --install build
 )
+[[ -d "$hyprland/hyprland-qtutils" ]] || (
+    set -e
+    git -C "$hyprland" \
+        clone https://github.com/hyprwm/hyprland-qtutils.git \
+        -b "$v_hyprland_qtutils"
+    cd "$hyprland/hyprland-qtutils"
+    cmake --no-warn-unused-cli \
+        -DCMAKE_BUILD_TYPE:STRING=Release \
+        -DCMAKE_INSTALL_PREFIX:PATH="$HOME/.local" \
+        -S . -B ./build
+    cmake --build ./build \
+        --config Release --target all \
+        -j "$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)"
+    sudo cmake --install build
+)
 [[ -d "$hyprland/Hyprland" ]] || (
     set -e
     git -C "$hyprland" \
-        clone --recursive https://github.com/hyprwm/Hyprland.git \
+        clone https://github.com/hyprwm/Hyprland.git \
         -b "$v_hyprland"
     cd "$hyprland/Hyprland"
-    rm -rf build/
     make all
     sudo make install
 )

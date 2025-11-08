@@ -26,15 +26,26 @@ return {
                 schema = { model = { default = "claude-sonnet-4.5" } }
               })
             end,
-            -- Use GPT-5 (premium) as default
-            -- copilot = function()
-            --   return require("codecompanion.adapters").extend("copilot", {
-            --     schema = { model = { default = "gpt-5" } }
-            --   })
-            -- end,
+            anthropic = function()
+              return require("codecompanion.adapters").extend("anthropic", {
+                env = {
+                  api_key = "cmd:gopass show -o -u --nosync api/anthropic/default",
+                }
+              })
+            end,
+            tavily = function()
+              return require("codecompanion.adapters").extend("tavily", {
+                env = {
+                  api_key = "cmd:gopass show -o -u --nosync api/tavily/default",
+                }
+              })
+            end,
           }
         },
         extensions = {
+          contextfiles = {
+            opts = {}
+          },
           mcphub = {
             callback = "mcphub.extensions.codecompanion",
             opts = {
@@ -59,9 +70,10 @@ return {
             -- auto_scroll = false,
             window = {
               layout = "float",
+              -- layout = "buffer",
             },
           },
-        --   diff = { provider = "mini_diff" },
+          --  diff = { provider = "mini_diff" },
         },
       })
     end,
